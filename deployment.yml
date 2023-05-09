@@ -1,16 +1,16 @@
-kind: Service
+kind: Service #expose applications both internally and externally.
 apiVersion: v1
 metadata:
   name: springboot-k8s-mysql
-  labels: 
+  labels: #used to specify identifying attributes of objects that are meaningful and relevant to users,
     name: springboot-k8s-mysql
 spec:
   ports:
-    - nodePort: 30163
+    - nodePort: 30163 #external access to your applications range 30000-32767
       port: 8080      
       targetPort: 8080  
       protocol: TCP
-  selector:           
+  selector:      #identify a set of objects.      
     app: springboot-k8s-mysql
   type: NodePort       
 
@@ -20,7 +20,7 @@ kind: Deployment
 metadata:              
   name: springboot-k8s-mysql
 spec:                
-  selector:         
+  selector:  #identify a set of objects.        
     matchLabels:
       app: springboot-k8s-mysql
   replicas: 3        
