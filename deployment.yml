@@ -1,12 +1,12 @@
-kind: Service #Services provide discovery and routing between pods
+kind: Service
 apiVersion: v1
 metadata:
   name: springboot-k8s-mysql
-  labels: #specify identifying attributes of objects that are meaningful and relevant to users
+  labels: 
     name: springboot-k8s-mysql
 spec:
   ports:
-    - nodePort: 30163 #get external traffic directly to your service.
+    - nodePort: 30163
       port: 8080      
       targetPort: 8080  
       protocol: TCP
@@ -34,23 +34,23 @@ spec:
           image: prathm6601/k8mysql:spring
           ports:
             - containerPort: 8080                
-          env:   #set env for database
-          - name: DB_HOST   # Setting Database host address from configMap
+          env:  
+          - name: DB_HOST 
             valueFrom: 
               configMapKeyRef:
-                name: db-conf  # name of configMap
+                name: db-conf 
                 key: host
-          - name: DB_NAME  # Setting Database name from configMap
+          - name: DB_NAME 
             valueFrom:
               configMapKeyRef:
                 name: db-conf 
                 key: name
-          - name: DB_USERNAME  # Setting Database username from Secret
+          - name: DB_USERNAME 
             valueFrom:
               secretKeyRef:
-                name: db-credentials # Secret Name
+                name: db-credentials 
                 key: username
-          - name: DB_PASSWORD # Setting Database password from Secret
+          - name: DB_PASSWORD 
             valueFrom:
               secretKeyRef:
                 name: db-credentials
